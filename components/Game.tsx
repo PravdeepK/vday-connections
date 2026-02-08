@@ -228,7 +228,7 @@ export default function Game({ puzzle }: GameProps) {
           For Manvir
         </h1>
         <p className="text-[#5a594e] text-[16px] mt-[2px]">
-          Create four groups of four!
+          Love You
         </p>
       </div>
 
