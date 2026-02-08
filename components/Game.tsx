@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Puzzle, Group, GROUP_SIZE, MAX_MISTAKES } from "@/lib/types";
 import { getShuffledWords, shuffleArray } from "@/lib/gameData";
 import WordTile from "./WordTile";
@@ -214,39 +214,44 @@ export default function Game({ puzzle }: GameProps) {
 
   if (!mounted) {
     return (
-      <div className="w-full max-w-[600px] mx-auto px-4 text-center pt-20">
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-          Connections
-        </h1>
+      <div className="w-full max-w-[600px] mx-auto px-4 text-center pt-10">
+        <p className="text-[17px] text-[#000]">Create four groups of four!</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-[600px] mx-auto px-4">
+    <div className="w-full max-w-[600px] mx-auto px-[10px] sm:px-4">
       {/* Header */}
-      <div className="text-center mb-6">
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+      <div className="text-center mb-3">
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
           For Manvir
         </h1>
-        <p className="text-[#5a594e] text-sm mt-1">
-          Love You
+        <p className="text-[#5a594e] text-[16px] mt-[2px]">
+          Create four groups of four!
         </p>
       </div>
 
       {/* Message toast — fixed height so grid doesn't shift */}
-      <div className="h-10 flex items-center justify-center mb-2">
+      <div className="h-9 flex items-center justify-center mb-1">
         <AnimatePresence>
           {message && (
-            <div className="bg-[#5a594e] text-white px-5 py-2 rounded-full text-sm font-semibold animate-bounce-in">
+            <motion.div
+              key={message}
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.85 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+              className="bg-[#5a594e] text-white px-5 py-[6px] rounded-full text-[14px] font-semibold"
+            >
               {message}
-            </div>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
 
       {/* Solved groups */}
-      <div className="flex flex-col gap-2 mb-2">
+      <div className="flex flex-col gap-[7px] mb-[7px]">
         <AnimatePresence>
           {solvedGroups.map((group) => (
             <SolvedGroup key={group.category} group={group} />
@@ -257,7 +262,7 @@ export default function Game({ puzzle }: GameProps) {
       {/* Word grid */}
       {remainingWords.length > 0 && (
         <div
-          className={`grid grid-cols-4 gap-2 mb-4 ${
+          className={`grid grid-cols-4 gap-[7px] mb-3 ${
             shaking ? "animate-shake" : ""
           }`}
         >
@@ -281,38 +286,38 @@ export default function Game({ puzzle }: GameProps) {
 
       {/* Mistake dots */}
       {!gameOver && (
-        <div className="mb-4">
+        <div className="mb-4 mt-1">
           <MistakeDots mistakesRemaining={mistakesRemaining} />
         </div>
       )}
 
       {/* Action buttons */}
       {!gameOver ? (
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center gap-[10px]">
           <button
             onClick={handleShuffle}
             disabled={isSubmitting}
-            className="px-5 py-2.5 border-2 border-[#000] rounded-full text-sm font-semibold
-                       hover:bg-[#f0f0f0] transition-colors
-                       disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-4 py-[10px] border border-[#000] rounded-full text-[14px] font-semibold
+                       active:bg-[#f0f0f0] transition-colors
+                       disabled:border-[#a0a0a0] disabled:text-[#a0a0a0] disabled:cursor-not-allowed"
           >
             Shuffle
           </button>
           <button
             onClick={handleDeselectAll}
             disabled={selectedWords.length === 0 || isSubmitting}
-            className="px-5 py-2.5 border-2 border-[#000] rounded-full text-sm font-semibold
-                       hover:bg-[#f0f0f0] transition-colors
-                       disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-4 py-[10px] border border-[#000] rounded-full text-[14px] font-semibold
+                       active:bg-[#f0f0f0] transition-colors
+                       disabled:border-[#a0a0a0] disabled:text-[#a0a0a0] disabled:cursor-not-allowed"
           >
             Deselect All
           </button>
           <button
             onClick={handleSubmit}
             disabled={selectedWords.length !== GROUP_SIZE || isSubmitting}
-            className="px-5 py-2.5 bg-[#000] text-white rounded-full text-sm font-semibold
-                       hover:bg-[#333] transition-colors
-                       disabled:bg-[#a0a0a0] disabled:cursor-not-allowed"
+            className="px-4 py-[10px] bg-[#000] text-white border border-[#000] rounded-full text-[14px] font-semibold
+                       active:bg-[#333] transition-colors
+                       disabled:bg-white disabled:text-[#a0a0a0] disabled:border-[#a0a0a0] disabled:cursor-not-allowed"
           >
             Submit
           </button>
@@ -321,19 +326,19 @@ export default function Game({ puzzle }: GameProps) {
         <div className="text-center">
           <div className="mb-4">
             {gameWon ? (
-              <p className="text-xl font-bold text-[#000]">
+              <p className="text-lg font-bold text-[#000]">
                 Congratulations!
               </p>
             ) : (
-              <p className="text-xl font-bold text-[#000]">
+              <p className="text-lg font-bold text-[#000]">
                 Better luck next time!
               </p>
             )}
           </div>
           <button
             onClick={handleRestart}
-            className="px-6 py-2.5 bg-[#000] text-white rounded-full text-sm font-semibold
-                       hover:bg-[#333] transition-colors"
+            className="px-5 py-[10px] bg-[#000] text-white rounded-full text-[14px] font-semibold
+                       active:bg-[#333] transition-colors"
           >
             Play Again
           </button>

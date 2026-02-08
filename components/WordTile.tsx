@@ -25,18 +25,20 @@ export default function WordTile({
       onClick={() => !disabled && onClick(word)}
       disabled={disabled || isWaving}
       className={`
-        w-full aspect-[2/1] sm:aspect-[2.2/1] rounded-lg font-semibold text-sm sm:text-base
-        uppercase tracking-wide select-none cursor-pointer
+        w-full rounded-[8px] font-bold text-[clamp(13px,3.5vw,16px)]
+        uppercase tracking-[0.02em] select-none cursor-pointer
         flex items-center justify-center
-        px-2 text-center leading-tight
+        px-1 text-center leading-tight
         ${
           isSelected
             ? "bg-[#5a594e] text-white"
-            : "bg-[#efefe6] text-[#000] hover:bg-[#dedad0]"
+            : "bg-[#efefe6] text-[#000] hover:bg-[#dedad0] active:bg-[#dedad0]"
         }
-        ${disabled ? "cursor-not-allowed opacity-60" : ""}
+        ${disabled && !isSelected ? "cursor-not-allowed opacity-60" : ""}
       `}
-      whileTap={!disabled && !isWaving ? { scale: 0.97 } : undefined}
+      style={{ aspectRatio: "1.2 / 1", transition: "background-color 0.1s ease" }}
+      whileTap={!disabled && !isWaving ? { scale: 0.93 } : undefined}
+      whileHover={!disabled && !isWaving ? { scale: 1.02 } : undefined}
       initial={false}
       animate={
         isWaving

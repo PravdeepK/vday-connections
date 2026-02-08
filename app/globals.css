@@ -61,13 +61,9 @@ body {
 
 /* Mistake dots */
 .mistake-dot {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background-color: #5a594e;
   transition: opacity 0.3s ease;
-}
-
-.mistake-dot.used {
-  opacity: 0.2;
 }
