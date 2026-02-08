@@ -5,23 +5,23 @@ export const valentinesPuzzle: Puzzle = {
   title: "Valentine's Day Edition",
   groups: [
     {
-      category: "TERMS OF ENDEARMENT",
-      words: ["HONEY", "SWEETHEART", "DARLING", "ANGEL"],
+      category: "THINGS THAT MAKE YOU HAPPY",
+      words: ["PEACH BELLINI", "DIET COKE", "SUSHI", "REESE'S"],
       difficulty: "yellow",
     },
     {
-      category: "THINGS THAT ARE RED",
-      words: ["ROSE", "CARDINAL", "FIRETRUCK", "MARS"],
+      category: "WHY I LOVE YOU",
+      words: ["ALIKE", "HOME", "SMART", "PATIENT"],
       difficulty: "green",
     },
     {
-      category: "___ HEART",
-      words: ["BRAVE", "SWEET", "BROKEN", "SACRED"],
+      category: "PET NAMES",
+      words: ["BRO", "RIO", "MABI", "MANI"],
       difficulty: "blue",
     },
     {
-      category: "ROMANTIC MOVIE TITLES",
-      words: ["GHOST", "TITANIC", "NOTEBOOK", "CASABLANCA"],
+      category: "HAPPY VALENTINE'S DAY",
+      words: ["WILL", "YOU", "BE", "MINE"],
       difficulty: "purple",
     },
   ],

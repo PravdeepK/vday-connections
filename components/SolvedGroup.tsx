@@ -5,18 +5,17 @@ import { Group, DIFFICULTY_COLORS } from "@/lib/types";
 
 interface SolvedGroupProps {
   group: Group;
-  index: number;
 }
 
-export default function SolvedGroup({ group, index }: SolvedGroupProps) {
+export default function SolvedGroup({ group }: SolvedGroupProps) {
   const bgColor = DIFFICULTY_COLORS[group.difficulty];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20, scaleY: 0.5 }}
-      animate={{ opacity: 1, y: 0, scaleY: 1 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="w-full rounded-lg py-3 px-4 text-center"
+      initial={{ opacity: 0, scaleY: 0.6 }}
+      animate={{ opacity: 1, scaleY: 1 }}
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+      className="w-full rounded-lg py-3 px-4 text-center origin-top"
       style={{ backgroundColor: bgColor }}
     >
       <div className="font-extrabold text-sm sm:text-base uppercase tracking-wide text-[#000]">
